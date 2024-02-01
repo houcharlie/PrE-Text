@@ -40,9 +40,9 @@
             "max_seq_len": 64,
             "max_samples": null,
             "num_users": null,
-            "train_path": "/ocean/projects/cis230033p/houc/LLM/datasets/linkedin_shuffle_train_fed_2500.json",
-            "eval_path": "/ocean/projects/cis230033p/houc/LLM/datasets/linkedin_shuffle_test.json",
-            "test_path": "/ocean/projects/cis230033p/houc/LLM/datasets/linkedin_shuffle_test.json"
+            "train_path": "linkedin_shuffle_train_fed_2500.json",
+            "eval_path": "linkedin_shuffle_test.json",
+            "test_path": "linkedin_shuffle_test.json"
         },
         "model": {
             "vocab_size": 50257,

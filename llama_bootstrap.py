@@ -1,8 +1,4 @@
-# Load model directly
-# from transformers import AutoTokenizer, AutoModelForCausalLM
 
-# tokenizer = AutoTokenizer.from_pretrained("TheBloke/Llama-2-70B-chat-AWQ", cache_dir='/dev/shm/LLM/again')
-# model = AutoModelForCausalLM.from_pretrained("TheBloke/Llama-2-70B-chat-AWQ", cache_dir='/dev/shm/LLM/again')
 from transformers import pipeline
 from tqdm import tqdm
 from vllm import LLM, SamplingParams
