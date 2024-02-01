@@ -428,7 +428,7 @@ def train(cfg):
     test_dataset = StackoverflowDataset(
         cfg.data.test_path, cfg.data.num_users
     )
-    tokenizer = GPT2Tokenizer.from_pretrained("distilgpt2", cache_dir='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
+    tokenizer = GPT2Tokenizer.from_pretrained("distilgpt2", cache_dir='')
     data_provider = StackoverflowDataProvider(
         train_dataset,
         eval_dataset,
@@ -440,7 +440,7 @@ def train(cfg):
         max_samples=cfg.data.max_samples,
     )
     if cfg.model.linear_probe:
-        model = AutoModelForCausalLM.from_pretrained("distilgpt2", cache_dir='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
+        model = AutoModelForCausalLM.from_pretrained("distilgpt2", cache_dir='')
         trainable_params = 0
         for p in model.transformer.parameters():
             p.requires_grad = False
@@ -449,7 +449,7 @@ def train(cfg):
             trainable_params += p.numel()
         print(f"Trainable parameters count: {trainable_params / 1e6}M")
     else:
-        model = AutoModelForCausalLM.from_pretrained("distilgpt2", cache_dir='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
+        model = AutoModelForCausalLM.from_pretrained("distilgpt2", cache_dir='')
         trainable_params = 0
         for p in model.transformer.parameters():
             trainable_params += p.numel()

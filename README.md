@@ -5,6 +5,8 @@ In the data folder you will need to split the {dataset}_train.json into datasets
 of split into dictionaries of 1250 clients each with 8 text samples each in order,
 and name it {dataset}_train_fed_1250.json. 
 
+Also get the first 100000 samples from c4-en on huggingface and call this dataset initialization.json.
+
 ## Running the FL baselines
 Use the base_config.json and populate the relevant fields into the json. Then you can run the baseline with
 

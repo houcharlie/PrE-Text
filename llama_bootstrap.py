@@ -26,7 +26,7 @@ if __name__ == "__main__":
     parser.add_argument('-H_multiplier', type=float, default=1.0)
     parser.add_argument('-machine_num', type=int, default=0)
     args = parser.parse_args()
-    outputdir = '/ocean/projects/cis230033p/houc/LLM/PE-results-noshuffle'
+    outputdir = ''
     output_dir = os.path.join(outputdir,
         "{0}_{1}_{2}_{3}_{4}_{5}_{6}_{7}_{8}/".format(
             args.datadir,
@@ -54,7 +54,7 @@ if __name__ == "__main__":
         curr_prompt = single_prompt.format(examples[0].replace('\n', ' ').replace('\t', ' '), examples[1].replace('\n', ' ').replace('\t', ' '), examples[2].replace('\n', ' ').replace('\t', ' '))
         prompt_list.append(curr_prompt)
     sampling_params = SamplingParams(temperature=1.0, top_p=1.0, max_tokens=85)
-    llm = LLM(model="meta-llama/Llama-2-7b-hf", download_dir='/ocean/projects/cis230033p/houc/LLM/llama_7b_model', max_model_len=1000, seed=args.machine_num * args.machine_num)
+    llm = LLM(model="meta-llama/Llama-2-7b-hf", download_dir='', max_model_len=1000, seed=args.machine_num * args.machine_num)
     outputs = llm.generate(prompt_list, sampling_params)
     # Print the outputs.
     output_list = []

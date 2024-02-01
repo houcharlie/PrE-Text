@@ -21,7 +21,7 @@ if __name__ == "__main__":
     parser.add_argument('-H_multiplier', type=float, default=1.0)
     # parser.add_argument('-machine_num', type=int, default=0)
     args = parser.parse_args()
-    outputdir = '/ocean/projects/cis230033p/houc/LLM/PE-results-noshuffle'
+    outputdir = ''
     output_dir = os.path.join(outputdir,
         "{0}_{1}_{2}_{3}_{4}_{5}_{6}_{7}_{8}/".format(
             args.datadir,
@@ -35,8 +35,8 @@ if __name__ == "__main__":
             args.trial
         )
     )
-    tokenizer = GPT2Tokenizer.from_pretrained("distilgpt2", cache_dir='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
-    model = AutoModelForCausalLM.from_pretrained("distilgpt2", cache_dir='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
+    tokenizer = GPT2Tokenizer.from_pretrained("distilgpt2", cache_dir='')
+    model = AutoModelForCausalLM.from_pretrained("distilgpt2", cache_dir='')
     tokenizer.add_special_tokens({'pad_token': '[PAD]'})
     model.resize_token_embeddings(len(tokenizer), pad_to_multiple_of=8)
     all_data = []
@@ -55,7 +55,7 @@ if __name__ == "__main__":
     syn_data_dict = [{'text': x} for x in all_data]
     cutoff_len = 64
     syn_data = Dataset.from_list(syn_data_dict)
-    with open(os.path.join(f'/ocean/projects/cis230033p/houc/LLM/raw_datasets/fed_data/data/{args.datadir}_eval.json'), 'r', encoding='utf8') as f:
+    with open(os.path.join(f'{args.datadir}_eval.json'), 'r', encoding='utf8') as f:
         test_data_raw = json.load(f)["1"]
 
     test_data_dict = [{'text': x} for x in test_data_raw]

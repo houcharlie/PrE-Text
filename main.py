@@ -24,55 +24,55 @@ from similarity import Similarity
 # pyre-ignore[C901]
 def main(args, accelerator):
     
-    tokenizer = RobertaTokenizer.from_pretrained("roberta-large", use_fast=True, cache_dir='/ocean/projects/cis230033p/houc/LLM/pretrained_models/')
-    model = RobertaForMaskedLM.from_pretrained("roberta-large", torch_dtype=torch.float16, cache_dir='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
+    tokenizer = RobertaTokenizer.from_pretrained("roberta-large", use_fast=True, cache_dir='')
+    model = RobertaForMaskedLM.from_pretrained("roberta-large", torch_dtype=torch.float16, cache_dir='')
 
     bart = None
     if args.embed == 0:
         accelerator.print('Mpnet', file=sys.stderr)
-        mpnet = SentenceTransformer("all-mpnet-base-v2", cache_folder='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
+        mpnet = SentenceTransformer("all-mpnet-base-v2", cache_folder='')
         total_embed = mpnet.get_sentence_embedding_dimension()
     elif args.embed == 1:
         accelerator.print('miniLM', file=sys.stderr)
-        mpnet = SentenceTransformer("all-MiniLM-L6-v2", cache_folder='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
+        mpnet = SentenceTransformer("all-MiniLM-L6-v2", cache_folder='')
         total_embed = mpnet.get_sentence_embedding_dimension()
     elif args.embed == 2:
         accelerator.print('bart-large', file=sys.stderr)
-        mpnet = models.Transformer("facebook/bart-large", cache_dir='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
+        mpnet = models.Transformer("facebook/bart-large", cache_dir='')
         pooling_model = models.Pooling(mpnet.get_word_embedding_dimension())
         mpnet = SentenceTransformer(modules=[mpnet, pooling_model])
         total_embed = mpnet.get_sentence_embedding_dimension()
     elif args.embed == 3:
         accelerator.print('mpnet and bartbase', file=sys.stderr)
-        mpnet = SentenceTransformer("all-mpnet-base-v2", cache_folder='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
-        bart = models.Transformer("facebook/bart-base", cache_dir='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
+        mpnet = SentenceTransformer("all-mpnet-base-v2", cache_folder='')
+        bart = models.Transformer("facebook/bart-base", cache_dir='')
         pooling_model = models.Pooling(bart.get_word_embedding_dimension())
         bart = SentenceTransformer(modules=[bart, pooling_model])
         total_embed = mpnet.get_sentence_embedding_dimension() + bart.get_sentence_embedding_dimension() 
     elif args.embed == 4:
         accelerator.print('miniLM and bartbase', file=sys.stderr)
-        mpnet = SentenceTransformer("all-MiniLM-L6-v2", cache_folder='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
-        bart = models.Transformer("facebook/bart-base", cache_dir='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
+        mpnet = SentenceTransformer("all-MiniLM-L6-v2", cache_folder='')
+        bart = models.Transformer("facebook/bart-base", cache_dir='')
         pooling_model = models.Pooling(bart.get_word_embedding_dimension())
         bart = SentenceTransformer(modules=[bart, pooling_model])
         total_embed = mpnet.get_sentence_embedding_dimension() + bart.get_sentence_embedding_dimension() 
     elif args.embed == 5:
         accelerator.print('mpnet and bartlarge', file=sys.stderr)
-        mpnet = SentenceTransformer("all-mpnet-base-v2", cache_folder='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
-        bart = models.Transformer("facebook/bart-large", cache_dir='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
+        mpnet = SentenceTransformer("all-mpnet-base-v2", cache_folder='')
+        bart = models.Transformer("facebook/bart-large", cache_dir='')
         pooling_model = models.Pooling(bart.get_word_embedding_dimension())
         bart = SentenceTransformer(modules=[bart, pooling_model])
         total_embed = mpnet.get_sentence_embedding_dimension() + bart.get_sentence_embedding_dimension() 
     elif args.embed == 6:
         accelerator.print('miniLM and bartlarge', file=sys.stderr)
-        mpnet = SentenceTransformer("all-MiniLM-L6-v2", cache_folder='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
-        bart = models.Transformer("facebook/bart-large", cache_dir='/ocean/projects/cis230033p/houc/LLM/pretrained_models')
+        mpnet = SentenceTransformer("all-MiniLM-L6-v2", cache_folder='')
+        bart = models.Transformer("facebook/bart-large", cache_dir='')
         pooling_model = models.Pooling(bart.get_word_embedding_dimension())
         bart = SentenceTransformer(modules=[bart, pooling_model])
         total_embed = mpnet.get_sentence_embedding_dimension() + bart.get_sentence_embedding_dimension() 
 
     
-    datadir = '/ocean/projects/cis230033p/houc/LLM/raw_datasets/fed_data/data/{0}_train.json'.format(args.datadir)
+    datadir = '{0}_train.json'.format(args.datadir)
     outputdir = args.outputdir
     seq_len = args.seq_len
     with open(datadir, encoding='utf8') as file:
@@ -129,7 +129,7 @@ def main(args, accelerator):
     )
     accelerator.print(output_dir, file=sys.stderr)
    
-    with open('/ocean/projects/cis230033p/houc/LLM/datasets/initialization.json', encoding='utf8') as f:
+    with open('initialization.json', encoding='utf8') as f:
         load_list = json.load(f)
                 
     load_list = [x for x in load_list if len(x.split(" ")) > 20]
@@ -278,7 +278,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser('Run PE-text.')
     parser.add_argument('-datadir', type=str, default='linkedin')
     parser.add_argument('-num_clients', type=int, default=2500)
-    parser.add_argument('-outputdir', type=str, default='/ocean/projects/cis230033p/houc/LLM/PE-results-noshuffle')
+    parser.add_argument('-outputdir', type=str, default='')
     parser.add_argument('-mask', type=float, default=0.3)
     parser.add_argument('-lookahead', type=int, default=4)
     parser.add_argument('-multiplier', type=int, default=1)
