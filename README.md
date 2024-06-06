@@ -65,7 +65,7 @@ We were able to run these commands on a single V100 (32 GB) GPU and also on a si
 For our on-device (small model) setting evaluations, the goal is to train a DistilGPT2 model to perform next word prediction.
 
 To reproduce our experiment in the small model setting, follow these steps:
-1. First follow the instructions in our paper to produce a DistilGPT2 model that is finetuned on a subset of the c4 dataset. As found in [Google's Gboard differentially private federated learning deployment](https://arxiv.org/abs/2305.18465), training on on the c4 dataset first before any DP finetuning improves performance greatly. Place the checkpoint into `PrE-Text/c4_checkpoint.pth`.
+1. First follow the instructions in our paper to produce a DistilGPT2 model that is finetuned on a subset of the c4 dataset. As found in [Google's Gboard differentially private federated learning deployment](https://arxiv.org/abs/2305.18465), training on the c4 dataset first before any DP finetuning improves performance greatly. Place the checkpoint into `PrE-Text/c4_checkpoint.pth`.
 
 2. To start the downstream model evaluation, given this checkpoint, you can run
 ```
