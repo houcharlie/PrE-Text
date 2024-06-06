@@ -96,4 +96,15 @@ We were able to run this on a machine with 4 A40 (48GB) GPUs.
 - `trial`: The trial id. This is useful to run multiple trials of the algorithm for reporting averages of runs.
 - `H_multiplier`: This times 4 times the noise scale is the threshold (line 16 of Algorithm 2 in the paper)
 
-
+# Citation
+If PrE-Text or this repository is useful in your own research/applications, you can use the following BibTeX entry:
+```
+@misc{hou2024pretext,
+      title={PrE-Text: Training Language Models on Private Federated Data in the Age of LLMs}, 
+      author={Charlie Hou and Akshat Shrivastava and Hongyuan Zhan and Rylan Conway and Trang Le and Adithya Sagar and Giulia Fanti and Daniel Lazar},
+      year={2024},
+      eprint={2406.02958},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+```
